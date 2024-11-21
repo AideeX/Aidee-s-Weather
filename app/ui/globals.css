@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  height: 100vh;
+  transition: background-image 0.3s ease-in-out;
+}
+
+/* Backgrounds */
+.bg-cloudy {
+  background-image: url('/cloudy.jpg');
+}
+
+.bg-rainy {
+  background-image: url('/rainy.jpg');
+}
+
+.bg-clear {
+  background-image: url('/clear-sky.jpg');
+}
+
+.bg-night {
+  background-image: url('/night.jpg');
+}
+
+.bg-sunrise {
+  background-image: url('/sunrise.jpg');
+}
+
+.bg-sunset {
+  background-image: url('/sunset.jpg');
+}
+
+.bg-default {
+  background-image: url('/default-sky.jpg');
+}
