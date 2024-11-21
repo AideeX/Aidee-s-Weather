@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import AppSkeleton from "./ui/Skeleton";
+import Image from 'next/image';
 
 interface WeatherData {
   city: string;
@@ -15,6 +16,11 @@ interface WeatherData {
 }
 
 interface CitySuggestion {
+  name: string;
+  country: string;
+}
+
+interface CityData {
   name: string;
   country: string;
 }
@@ -40,16 +46,16 @@ export default function WeatherApp() {
       const response = await fetch(geocodeURL);
 
       if (response.ok) {
-        const data = await response.json();
+        const data: CityData[] = await response.json();
         setCitySuggestions(
-          data.map((city: any) => ({
+          data.map((city: CityData) => ({
             name: city.name,
             country: city.country,
           }))
         );
       }
-    } catch (err) {
-      console.error("Failed to fetch city suggestions:", err);
+    } catch (error) {
+      console.error("Failed to fetch city suggestions:", error);
     }
   };
 
@@ -124,11 +130,11 @@ export default function WeatherApp() {
 
       setError(null);
       setIsModalOpen(true);
-    } catch (err) {
+    } catch  {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
-      setCitySuggestions([]); // Clear suggestions after fetching weather
+      setCitySuggestions([]); 
     }
   };
 
@@ -144,7 +150,7 @@ export default function WeatherApp() {
 
   const handleSuggestionClick = (suggestion: CitySuggestion) => {
     setCity(`${suggestion.name}, ${suggestion.country}`);
-    setCitySuggestions([]); // Clear suggestions after selection
+    setCitySuggestions([]); 
   };
 
   const closeModal = () => {
@@ -169,7 +175,7 @@ export default function WeatherApp() {
               className="text-3xl font-bold mb-4 text-center"
               style={{ color: "#512DA8" }}
             >
-              Aidee's Weather Report
+              Aidee&apos;s Weather Report
             </h1>
             <div className="relative mb-6">
               <input
@@ -231,10 +237,11 @@ export default function WeatherApp() {
                   className="flex flex-col items-center text-center gap-4"
                   id="weatherModal"
                 >
-                  <img
-                    src={`https://openweathermap.org/img/wn/${weatherData.icon}.png`}
+                  <Image
+                      src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
                     alt={weatherData.description}
-                    className="w-20 h-20"
+                    width={80}
+                    height={80}
                   />
                   <h2
                     className="text-2xl font-semibold"
