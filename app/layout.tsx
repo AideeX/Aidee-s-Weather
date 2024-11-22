@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "My Weather App",
+  title: "Aidee's Weather Report",
   description: "My weather app powered by openweathermap.org",
 };
 
